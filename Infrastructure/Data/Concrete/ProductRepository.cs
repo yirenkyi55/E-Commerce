@@ -26,6 +26,7 @@ namespace Infrastructure.Data.Concrete
             var product = await _context.Products
                                         .Include(p => p.ProductBrand)
                                         .Include(p => p.ProductType)
+                                        .Include("something")
                                         .FirstOrDefaultAsync(p => p.Id == id);
 
             return product;

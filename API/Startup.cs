@@ -1,4 +1,6 @@
 
+using API.Mappings;
+using AutoMapper;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Data.Concrete;
@@ -30,7 +32,10 @@ namespace API
             });
 
             //Register scopes for the repositories
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddAutoMapper(typeof(ProductMapping));
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +49,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
