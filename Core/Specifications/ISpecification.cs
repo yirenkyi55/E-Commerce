@@ -7,7 +7,15 @@ namespace Core.Specifications
     public interface ISpecification<T>
     {
 
-        Expression<Func<T, bool>> Criteria { get; } //This returns an Expression that takes in a delegates of parameter T and return type of bool
-        List<Expression<Func<T, object>>> Includes { get; } //A list of expression with delegates that return an object
+        Expression<Func<T, bool>> Criteria { get; } 
+        List<Expression<Func<T, object>>> Includes { get; } 
+        
+        Expression<Func<T, object>> OrderBy { get;  }
+        
+        Expression<Func<T, object>> OrderByDescending { get; }
+        
+        int Skip { get; }
+        int Take { get; }
+        bool IsPagingEnabled { get; }
     }
 }

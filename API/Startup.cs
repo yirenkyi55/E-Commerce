@@ -37,6 +37,7 @@ namespace API
             app.UseRouting();
 
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

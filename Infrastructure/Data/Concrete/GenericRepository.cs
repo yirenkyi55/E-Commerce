@@ -38,11 +38,16 @@ namespace Infrastructure.Data.Concrete
             return await ApplySpecification(specification).ToListAsync();
         }
 
+        public async Task<int> CountAsync(ISpecification<T> specification)
+        {
+            return await ApplySpecification(specification).CountAsync();
+        }
+
         private IQueryable<T> ApplySpecification(ISpecification<T> specification)
         {
-            var querable = _context.Set<T>().AsQueryable();
+            var queryable = _context.Set<T>().AsQueryable();
 
-            return SpecificationEvaluator<T>.GetQuerable(querable, specification);
+            return SpecificationEvaluator<T>.GetQueryable(queryable, specification);
         }
     }
 }
