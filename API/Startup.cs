@@ -1,15 +1,9 @@
-
-using API.Mappings;
-using AutoMapper;
-using Core.Interfaces;
-using Infrastructure.Data;
-using Infrastructure.Data.Concrete;
+using API.Extensions;
+using API.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace API
 {
@@ -26,25 +20,17 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<StoreContext>(options =>
-            {
-                options.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
-            });
-
-            //Register scopes for the repositories
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddAutoMapper(typeof(ProductMapping));
-            services.AddHttpContextAccessor();
+            services.AddDatabaseServices(_configuration);
+            services.AddApplicationServices();
+            services.AddSwaggerServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseStatusCodePagesWithReExecute("/errors/{0}"); //this redirects ro ErrorController, causing 404 not found error
 
             app.UseHttpsRedirection();
 
@@ -53,6 +39,9 @@ namespace API
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            //Add the swagger middleware before the EndPoints middleware
+            app.UseSwaggerDocumentation();
 
             app.UseEndpoints(endpoints =>
             {
