@@ -2,3 +2,9 @@ dotnet ef database drop -p ./Infrastructure -s ./API
 dotnet ef migrations remove -p ./Infrastructure -s ./API
 donet watch run
 dotnet ef migrations add InitialCreate -p ./Infrastructure -s ./API -o Data/Migrations
+ng g m core
+ng g m shop
+ng g m shared
+ng g s shop
+
+Core: is considered singleton in the application something like navbar that is going to shared accross the entire application. 

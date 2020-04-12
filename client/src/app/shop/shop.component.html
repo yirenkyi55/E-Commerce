@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="row">
+    <section class="col-md-3 col-sm-12">
+      <h6 class="text-warning ml-3 text-center">Sort</h6>
+
+      <nz-select
+        nzPlaceHolder="Select a person"
+        [(ngModel)]="shopParams.sort"
+        nzSize="large"
+        (ngModelChange)="onSortSelected($event)"
+      >
+        <nz-option
+          nzLabel="{{ sort.name }}"
+          nzValue="{{ sort.value }}"
+          *ngFor="let sort of sortOptions"
+        ></nz-option>
+      </nz-select>
+
+      <div class="card shadow mb-2">
+        <div class="card-header text-center">
+          <h6 class="text-warning ml-3">Filter By</h6>
+        </div>
+        <div class="card-body">
+          <ul nz-menu nzMode="inline">
+            <li nz-submenu nzTitle="Brands" nzIcon="shop" nzOpen>
+              <ul>
+                <li
+                  nz-menu-item
+                  *ngFor="let brand of brands"
+                  [value]="brand.id"
+                  (click)="onBrandIdSelected(brand.id)"
+                  [ngClass]="{
+                    'ant-menu-item-selected': brand.id === shopParams.brandId
+                  }"
+                >
+                  {{ brand.name }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <nz-divider></nz-divider>
+
+          <ul nz-menu nzMode="inline">
+            <li nz-submenu nzTitle="Types" nzIcon="shopping">
+              <ul>
+                <li
+                  nz-menu-item
+                  *ngFor="let type of types"
+                  [value]="type.id"
+                  (click)="onTypeIdSelected(type.id)"
+                  [ngClass]="{
+                    'ant-menu-item-selected': type.id === shopParams.typeId
+                  }"
+                >
+                  {{ type.name }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="col-md-9 col-sm-12">
+      <div class="card text-center mt-4 shadow">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center pb-2">
+            <app-pagination-header
+              [pageNumber]="this.shopParams.pageNumber"
+              [pageSize]="this.shopParams.pageSize"
+              [totalCount]="this.totalCount"
+            ></app-pagination-header>
+
+            <div class="form-inline mt-2">
+              <input
+                type="search"
+                class="form-control mr-2"
+                placeholder="search"
+                #search
+                (keyup.enter)="onSearch()"
+              />
+              <button
+                class="btn btn-outline-primary my-2 mr-2"
+                (click)="onSearch()"
+              >
+                Search
+              </button>
+              <button class="btn btn-outline-success my-2" (click)="onReset()">
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 mb-4" *ngFor="let item of products">
+              <app-product-item [product]="item"></app-product-item>
+            </div>
+            <div
+              *ngIf="totalCount === 0"
+              class="col-md-4 offset-4 text-warning text-capitalize"
+            >
+              <p>No Items Match</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <div
+            class="d-flex justify-content-center"
+            *ngIf="totalCount && totalCount > 0"
+          >
+            <app-pager
+              [totalCount]="totalCount"
+              [pageSize]="shopParams.pageSize"
+              (pageChange)="onPageChanged($event)"
+            ></app-pager>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
