@@ -5,7 +5,7 @@
     class="img-fluid bg-left bg-info"
   />
   <div class="card-body d-flex flex-column">
-    <a href="#">
+    <a routerLink="/shop/{{ product.id }}">
       <h6 class="text-uppercase text-justify">{{ product.name }}</h6>
     </a>
 
@@ -16,7 +16,11 @@
         type="button"
         class="btn btn-outline-secondary fa fa-shopping-cart mr-2"
       ></button>
-      <button type="button" class="btn btn-outline-secondary">
+      <button
+        routerLink="/shop/{{ product.id }}"
+        type="button"
+        class="btn btn-outline-secondary"
+      >
         View
       </button>
     </div>
