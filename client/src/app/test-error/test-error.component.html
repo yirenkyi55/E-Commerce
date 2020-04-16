@@ -1,20 +1,22 @@
-<div class="row">
-  <button (click)="get500Error()" class="btn btn-outline-primary mr-3">
-    Test 500 Error
-  </button>
-  <button (click)="get404Error()" class="btn btn-outline-primary mr-3">
-    Test 404 Error
-  </button>
-  <button (click)="get400Error()" class="btn btn-outline-primary mr-3">
-    Test 400 Error
-  </button>
-  <button (click)="get422Error()" class="btn btn-outline-primary mr-3">
-    Test 422 Error
-  </button>
-</div>
+<div class="container mt-3">
+  <div class="row">
+    <button (click)="get500Error()" class="btn btn-outline-primary mr-3">
+      Test 500 Error
+    </button>
+    <button (click)="get404Error()" class="btn btn-outline-primary mr-3">
+      Test 404 Error
+    </button>
+    <button (click)="get400Error()" class="btn btn-outline-primary mr-3">
+      Test 400 Error
+    </button>
+    <button (click)="get422Error()" class="btn btn-outline-primary mr-3">
+      Test 422 Error
+    </button>
+  </div>
 
-<div class="row mt-5">
-  <ul class="text-danger">
-    <li *ngFor="let error of validationErrors">{{ error }}</li>
-  </ul>
+  <div class="row mt-5">
+    <ul class="text-danger">
+      <li *ngFor="let error of validationErrors">{{ error }}</li>
+    </ul>
+  </div>
 </div>

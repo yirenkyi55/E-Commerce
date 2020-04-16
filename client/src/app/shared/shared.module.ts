@@ -6,7 +6,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { PaginationHeaderComponent } from './components/pagination-header/pagination-header.component';
 import { PagerComponent } from './components/pager/pager.component';
-
+import { CarouselModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [PaginationHeaderComponent, PagerComponent],
   imports: [
@@ -15,6 +15,7 @@ import { PagerComponent } from './components/pager/pager.component';
     NzMenuModule,
     NzDividerModule,
     NzSelectModule,
+    CarouselModule.forRoot()
   ],
   exports: [
 
@@ -24,7 +25,8 @@ import { PagerComponent } from './components/pager/pager.component';
     NzDividerModule,
     NzSelectModule,
     PaginationHeaderComponent,
-    PagerComponent
+    PagerComponent,
+    CarouselModule
   ]
 })
 export class SharedModule { }
