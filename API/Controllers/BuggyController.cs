@@ -38,7 +38,7 @@ namespace API.Controllers
             return BadRequest(new ApiResponse(400));
         }
 
-        [HttpGet("badrequest/{id}")]
+        [HttpGet("unprocessable/{id}")]
         public ActionResult GetUnprocessableEntity(int id)
         {
             return Ok();

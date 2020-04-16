@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,13 +10,20 @@ import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HomeModule } from './home/home.module';
+import { TestErrorComponent } from './test-error/test-error.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 registerLocaleData(en);
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestErrorComponent,
+    NotFoundComponent,
+    ServerErrorComponent
 
   ],
   imports: [
@@ -29,7 +36,10 @@ registerLocaleData(en);
     FormsModule,
     HomeModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
