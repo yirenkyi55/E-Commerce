@@ -11,6 +11,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
           <e p="BaseApiController.cs" t="Include" />
+          <e p="BasketController.cs" t="Include" />
           <e p="BuggyController.cs" t="Include" />
           <e p="ErrosController.cs" t="Include" />
           <e p="ProductsController.cs" t="Include" />
@@ -82,11 +83,14 @@
         <e p="Core.csproj" t="IncludeRecursive" />
         <e p="Entities" t="Include">
           <e p="BaseEntity.cs" t="Include" />
+          <e p="BasketItem.cs" t="Include" />
+          <e p="CustomerBasket.cs" t="Include" />
           <e p="Product.cs" t="Include" />
           <e p="ProductBrand.cs" t="Include" />
           <e p="ProductType.cs" t="Include" />
         </e>
         <e p="Interfaces" t="Include">
+          <e p="IBasketRepository.cs" t="Include" />
           <e p="IGenericRepository.cs" t="Include" />
           <e p="IProductRepository.cs" t="Include" />
         </e>
@@ -110,6 +114,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Data" t="Include">
           <e p="Concrete" t="Include">
+            <e p="BasketRepository.cs" t="Include" />
             <e p="GenericRepository.cs" t="Include" />
             <e p="ProductRepository.cs" t="Include" />
           </e>
